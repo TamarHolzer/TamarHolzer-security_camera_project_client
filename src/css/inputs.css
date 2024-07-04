@@ -1,0 +1,35 @@
+ .formInput{
+    background-color: black;
+    height: 100%;
+    width: 60%;
+    padding: 15%;
+    opacity: 0.5;
+    color: aliceblue
+ }
+
+ .bodyLogin{
+    background-image: url("https://img.freepik.com/premium-photo/cctv-tool-twilight-sky-backgroundequipment-security-systems_1048944-29063872.jpg?w=740");
+    
+        /* Full height */
+        height: 100%;
+    
+        /* Center and scale the image nicely */
+        background-position: top;
+        background-repeat: no-repeat;
+        background-size: cover;
+ }
+ .homeImg {
+    vertical-align: middle;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    position: fixed;
+ }
+ .card{
+   margin: 1%;
+ }
+
+ .img{
+   padding: 0%;
+ }
