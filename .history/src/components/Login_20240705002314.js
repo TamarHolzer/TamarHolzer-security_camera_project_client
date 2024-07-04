@@ -51,20 +51,20 @@ export default function Login() {
           sessionStorage.setItem("user connect", 1);
           sessionStorage.setItem("user", 2);//שמירת הנתונים ב sessionstorage
           navigate("/Home");
-          // axios
-          //   .post("http://127.0.0.1:5000/log_in", user)
-          //   .then((res) => {
-          //     console.log(res.data);
-          //     sessionStorage.setItem("user connect", 1);
-          //     sessionStorage.setItem("user", res.data._id);
-          //     navigate("/Home");
-          //   })
-          //   .catch((err) => {
-          //     console.log(err);
-          //     alert("שם המשתמש או הסיסמא אינם נכונים");
-          //     mailRef.current.value = "";
-          //     passRef.current.value = "";
-          //   });
+          axios
+            .post("http://127.0.0.1:5000/log_in", user)
+            .then((res) => {
+              console.log(res.data);
+              sessionStorage.setItem("user connect", 1);
+              sessionStorage.setItem("user", res.data._id);
+              navigate("/Home");
+            })
+            .catch((err) => {
+              console.log(err);
+              alert("שם המשתמש או הסיסמא אינם נכונים");
+              mailRef.current.value = "";
+              passRef.current.value = "";
+            });
         }
       };
   return (
@@ -110,7 +110,7 @@ export default function Login() {
         </Form.Group>
         }
         <Col sm="10">
-          <Button onClick={sendLogin}>שלח</Button>
+          <Button onClick={sendLogin}></Button>
         </Col>
       </Form>
     </div>

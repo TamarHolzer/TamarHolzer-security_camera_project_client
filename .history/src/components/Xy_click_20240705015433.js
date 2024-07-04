@@ -91,9 +91,9 @@ function Xy_click() {
             <div id="coordinates">
               <ul>
                 {coordinates.map((coord, index) => (
-                  <li key={index} className="display-room">
+                  <li key={index} onClick={() => removePoint(index)}>
                     X: {coord.x}, Y: {coord.y}
-                    <span className="trash-room" onClick={() => removePoint(index)}><FaRegTrashAlt /></span>
+                    <FaRegTrashAlt />
                   </li>
                 ))}
               </ul>

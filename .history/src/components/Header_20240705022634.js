@@ -7,11 +7,9 @@ const Header = () => {
   return (
 
     <header className="header">
-      <div className="logo-wrapper">
-        <Link to="/">
-          <img src={logo} alt="My Website Logo" className="logo" />
-        </Link>
-      </div>
+      <Link to="/">
+        <img src={logo} alt="My Website Logo" className="logo" />
+      </Link>
       <nav className="header-buttons">
         {!sessionStorage.getItem('user') && <>
           <Link className='linkHeader' to="/login">התחבר</Link>

@@ -28,32 +28,8 @@
     border: 1px solid blue;
  }
  .ClickableSVG {
-    width: 100%;
+    width: auto;
     height: 100%;
-    object-fit:  cover;
-    object-position: center;
- }
-
- .trash-room{
-    float:  right;
-    cursor: pointer;
- }
- .cordinates-wrapper{
-    height: 180px;
-    padding: 10px;
-    overflow: auto;
-    border: 1px solid #2f2f2f;
-    margin-bottom: 10px;
- }
- .display-room{
-    margin-bottom: 10px;
- }
-
- .room-wrapper{
-    height: calc(100vh - 450px);
-    overflow: auto;
-    background-color: #ddd;
-    padding: 10px;
  }
 
  .ClickableSVG circle {

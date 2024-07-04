@@ -53,7 +53,6 @@ function UploadImage(props) {
 
   return (
     <div>
-    <div>
       <input
         id="fileInput"
         type="file"
@@ -68,15 +67,13 @@ function UploadImage(props) {
       >
         העלה תמונה
       </button>
- 
-    </div>
-    <div className="img-wrapper">
-           <svg
+      <svg
         onClick={(event) => {
           const [x, y] = getClickCoords(event);
           props.saveClick(x, y);
         }}
         className="ClickableSVG"
+        width="100%"
       >
         <image
           href={image}
@@ -88,7 +85,6 @@ function UploadImage(props) {
         {circles}
       </svg>
     </div>
-  </div>
   );
 }
 

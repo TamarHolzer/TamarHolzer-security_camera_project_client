@@ -77,6 +77,7 @@ function UploadImage(props) {
           props.saveClick(x, y);
         }}
         className="ClickableSVG"
+        width="100%"
       >
         <image
           href={image}

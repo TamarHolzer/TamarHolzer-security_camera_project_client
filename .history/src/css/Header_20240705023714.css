@@ -1,5 +1,5 @@
   .header {
-    background-color: #333;
+    background-color: #888;
     padding: 10px;
     color: white;
     display: flex;
@@ -25,29 +25,17 @@
     padding: 10px;
     display: inline-block;
   }
-  .header-buttons{
-    width: 350px;
-  }
-
   .linkHeader{
     color: white;
-    text-decoration: none;
-    padding: 10px;
-    border: 1px solid #fff;
-    border-radius: 7px;
-    margin: 0 10px;
+      text-decoration: none;
+      padding: 1%;
   }
-
   .linkHeader:hover{
     text-decoration: overline !important;
-    color: rgb(245, 212, 212);
+    color: red;
   }
   .logo-wrapper{
-    height: 100%;
-    background: rgb(255, 255, 255);
-    background: linear-gradient(350deg, rgba(255, 255, 255, 1) 25%, rgba(221, 221, 221, 1) 100%);
-    border-radius: 20px;
-    padding: 2px;
+    height:  100%;
   }
   .logo{
     height: 100%;

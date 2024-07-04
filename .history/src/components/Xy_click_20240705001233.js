@@ -6,7 +6,6 @@ import UploadImage from "./UploadImage";
 import { Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { FaRegTrashAlt } from "react-icons/fa";
-import { json } from "react-router-dom";
 
 function Xy_click() {
   const [coordinates, setCoordinates] = useState([]);
@@ -69,66 +68,40 @@ function Xy_click() {
     const newCoordinates = coordinates.filter((_, index) => index !== i);
     setCoordinates(newCoordinates);
   };
-  const removeRoom = (i) => {
-    const newRooms = rooms.filter((_, index) => index !== i);
-    setRooms(newRooms);
-  };
 
   return (
-    <div className="page-wrapper">
-      <div className="sidebar">      
-        <Button as="a" variant="primary" onClick={addRoom}>
-          הוסף חדר
+    <div>
+      <h1>Upload a sketch and select the vertices of the rooms</h1>
+      {rooms.length && (
+        <Button className="buttons" as="a" variant="primary" onClick={sendList}>
+          שלח
         </Button>
-        {rooms.length && (
-          <Button className="buttons" as="a" variant="primary" onClick={sendList}>
-            שלח
-          </Button>
-        )}
-        <div className="cordinates-wrapper">
-          <h4>Coordinates:</h4>
-          {coordinates.length > 0 && (
-            <div id="coordinates">
-              <ul>
-                {coordinates.map((coord, index) => (
-                  <li key={index} className="display-room">
-                    X: {coord.x}, Y: {coord.y}
-                    <span className="trash-room" onClick={() => removePoint(index)}><FaRegTrashAlt /></span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
-        </div>
-        <div className="room-wrapper">
-          <ul>
-            {Object.keys(rooms).map((key,index) => (
-              <li key={key}>
-                <strong>Room num: {key}: </strong>
-                <span className="trash-room" onClick={() => removeRoom(index)}><FaRegTrashAlt /></span> 
-                {typeof rooms[key] === 'object' ? JSON.stringify(rooms[key]) : rooms[key]}
-                
-              </li>
-            ))}
-          </ul>
-        </div>
-
-      </div>
-      <div className="page-content">
-      <h3>Upload a sketch and select the vertices of the rooms</h3>
-      <div>
+      )}
+      <Button as="a" variant="primary" onClick={addRoom}>
+        הוסף חדר
+      </Button>
+      <div className="image-container">
         <UploadImage
           saveClick={handleImageClick}
           coordinates={coordinates}
           uploadImage={uploadImage}
           setImageURL={setImageURL}
         />
-
-      </div>
-      
-
       </div>
 
+      {coordinates.length > 0 && (
+        <div id="coordinates">
+          <h3>Coordinates:</h3>
+          <ul>
+            {coordinates.map((coord, index) => (
+              <li key={index} onClick={() => removePoint(index)}>
+                X: {coord.x}, Y: {coord.y}
+                <FaRegTrashAlt />
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   );
 }

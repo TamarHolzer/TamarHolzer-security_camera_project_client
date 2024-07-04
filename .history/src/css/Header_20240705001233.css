@@ -1,0 +1,35 @@
+.header {
+    background-color: #282c34;
+    padding: 20px;
+    color: white;
+        text-align: right;
+  }
+  
+  .header nav ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .header nav ul li {
+    display: inline;
+    margin: 0 10px;
+
+  }
+  
+  .header nav ul li a .linkHeader{
+    color: white;
+    text-decoration: none;
+  }
+  .linkHeader{
+    color: white;
+      text-decoration: none;
+      padding: 1%;
+  }
+  .linkHeader:hover{
+    text-decoration: overline !important;
+    color: red;
+  }
+  
+.logo{
+  margin-right: 30%;
+}

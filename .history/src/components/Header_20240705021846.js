@@ -1,18 +1,16 @@
 import React from 'react';
 import '../css/Header.css';
-import logo from '../pics/logo2.png'
+import logo from '../pics/logo.png'
 import { Link } from 'react-router-dom';
 
 const Header = () => {
   return (
 
     <header className="header">
-      <div className="logo-wrapper">
-        <Link to="/">
-          <img src={logo} alt="My Website Logo" className="logo" />
-        </Link>
-      </div>
-      <nav className="header-buttons">
+      <Link to="/">
+        <img src={logo} width="5%" alt="My Website Logo" className="logo" />
+      </Link>
+      <nav>
         {!sessionStorage.getItem('user') && <>
           <Link className='linkHeader' to="/login">התחבר</Link>
           <Link className='linkHeader' to="/sign-up">הרשם</Link></>}

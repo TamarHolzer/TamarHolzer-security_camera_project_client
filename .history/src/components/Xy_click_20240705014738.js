@@ -86,14 +86,14 @@ function Xy_click() {
           </Button>
         )}
         <div className="cordinates-wrapper">
-          <h4>Coordinates:</h4>
           {coordinates.length > 0 && (
             <div id="coordinates">
+              <h3>Coordinates:</h3>
               <ul>
                 {coordinates.map((coord, index) => (
-                  <li key={index} className="display-room">
+                  <li key={index} onClick={() => removePoint(index)}>
                     X: {coord.x}, Y: {coord.y}
-                    <span className="trash-room" onClick={() => removePoint(index)}><FaRegTrashAlt /></span>
+                    <FaRegTrashAlt />
                   </li>
                 ))}
               </ul>

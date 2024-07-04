@@ -110,7 +110,7 @@ export default function Login() {
         </Form.Group>
         }
         <Col sm="10">
-          <Button onClick={sendLogin}>שלח</Button>
+          <Button onClick={sendLogin}></Button>
         </Col>
       </Form>
     </div>

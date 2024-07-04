@@ -45,9 +45,6 @@
     border: 1px solid #2f2f2f;
     margin-bottom: 10px;
  }
- .display-room{
-    margin-bottom: 10px;
- }
 
  .room-wrapper{
     height: calc(100vh - 450px);
