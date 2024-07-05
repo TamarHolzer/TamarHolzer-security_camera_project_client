@@ -1,0 +1,26 @@
+.page-wrapper{
+    display: flex;
+    width: 100%;
+}
+.history-sidebar{
+    flex-basis: 300px;
+    min-width: 315px;
+    background-color: #eee;
+    padding: 10px;
+    height: calc(100vh - 101px);
+}
+.history-content{
+    padding: 20px;
+    flex-grow: 2;
+    height: calc(100vh - 150px);
+}
+
+.close-image{
+    padding: 3px;
+    cursor: pointer;
+}
+h2{
+    text-align: center;
+    margin-top: -45px;
+    color: #fff;
+}

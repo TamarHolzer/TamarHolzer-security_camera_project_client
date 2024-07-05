@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Card } from "react-bootstrap";
 import ShowPlan from "./ShowPlan";
+import '../css/history.css';
 
 export default function HistoryPlanning() {
   const [currentPlanning, setCurrentPlanning] = useState(null);
@@ -48,28 +49,37 @@ export default function HistoryPlanning() {
 
   return (
     <div>
-      {lastPlanning.length === 0 && (
-        <h1>עוד לא תכננת הצבת מצלמות דרך האלגוריתם האופטימלי שלנו</h1>
-      )}
-      {lastPlanning.map((item, index) => {
-        return (
-          <Card
-            className="card"
-            style={{ width: "18rem", cursor: "pointer" }}
-            onClick={() => handleCardClick(item)}
-            key={index}
-          >
-            <Card.Img variant="top" src={item.image} />
-            <Card.Body>
-              <Card.Title>{item.date}</Card.Title>
-            </Card.Body>
-          </Card>
-        );
-      })}
-      {currentPlanning &&
-        <>
-        <h1 onClick={removePlan}>X</h1>
-      <ShowPlan img={currentPlanning.image} coord={currentPlanning.coord}/></>}
+      <h2>Projects History</h2>
+      <div className="page-wrapper">
+        {lastPlanning.length === 0 && (
+          <h1>עוד לא תכננת הצבת מצלמות דרך האלגוריתם האופטימלי שלנו</h1>
+        )}
+        <div className="history-sidebar">
+          {lastPlanning.map((item, index) => {
+            return (
+              <div>
+                <Card
+                  className="card"
+                  style={{ width: "18rem", cursor: "pointer" }}
+                  onClick={() => handleCardClick(item)}
+                  key={index}
+                >
+                  <Card.Img variant="top" src={item.image} />
+                  <Card.Body>
+                    <Card.Title>{item.date}</Card.Title>
+                  </Card.Body>
+                </Card>
+              </div>
+            );
+          })}
+          </div>
+          <div className="history-content" >
+          {currentPlanning &&
+            <>
+            <h1 onClick={removePlan} className="close-image">X</h1>
+          <ShowPlan img={currentPlanning.image} coord={currentPlanning.coord}/></>}
+        </div>
+      </div>
     </div>
   );
 }
