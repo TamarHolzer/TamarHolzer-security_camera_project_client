@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { Form, Col, Row, Button } from "react-bootstrap";
 import "../css/inputs.css";
 import axios from "axios";
@@ -16,6 +16,17 @@ export default function Login() {
       location.pathname.includes("sign-up") ? 1:0
     );
 
+    const [loading, setLoading] = useState(false);
+
+    
+    useEffect(() => {
+      if (loading) {
+        window.location.reload();
+      } else {
+        console.log('page already loaded');
+      }
+    }, [loading]);
+
 
     const sendLogin = () => {
         const user = {
@@ -25,6 +36,7 @@ export default function Login() {
         if (signOrLogin) {
           sessionStorage.setItem("user connect", 1);
           sessionStorage.setItem("user", 2);//שמירת הנתונים ב sessionstorage
+          setLoading(true)
           navigate("/Home");
           if (passRef.current.value === valid_passRef.current.value) {
             // axios
@@ -48,23 +60,24 @@ export default function Login() {
             passRef.current.value = "";
           }
         } else {
-          sessionStorage.setItem("user connect", 1);
-          sessionStorage.setItem("user", 2);//שמירת הנתונים ב sessionstorage
-          navigate("/Home");
-          // axios
-          //   .post("http://127.0.0.1:5000/log_in", user)
-          //   .then((res) => {
-          //     console.log(res.data);
-          //     sessionStorage.setItem("user connect", 1);
-          //     sessionStorage.setItem("user", res.data._id);
-          //     navigate("/Home");
-          //   })
-          //   .catch((err) => {
-          //     console.log(err);
-          //     alert("שם המשתמש או הסיסמא אינם נכונים");
-          //     mailRef.current.value = "";
-          //     passRef.current.value = "";
-          //   });
+          // sessionStorage.setItem("user connect", 1);
+          // sessionStorage.setItem("user", 2);//שמירת הנתונים ב sessionstorage
+          // sendLogin(true);
+          // navigate("/Home");
+          axios
+            .post("http://127.0.0.1:5000/log_in", user)
+            .then((res) => {
+              console.log(res.data);
+              sessionStorage.setItem("user connect", 1);
+              sessionStorage.setItem("user", res.data._id);
+              navigate("/Home");
+            })
+            .catch((err) => {
+              console.log(err);
+              alert("שם המשתמש או הסיסמא אינם נכונים");
+              mailRef.current.value = "";
+              passRef.current.value = "";
+            });
         }
       };
   return (

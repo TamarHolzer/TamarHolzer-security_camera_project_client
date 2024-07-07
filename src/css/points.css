@@ -56,11 +56,35 @@
     padding: 10px;
  }
 
- .ClickableSVG circle {
+ .final-coordinates{
+    border: 1px solid #333;
+    padding: 10px;
+    background-color: #eee;
+    border-radius: 5px;
+ }
+
+ .title{
+    color: #555;
+    font-weight: bold;
+ }
+
+ .ratio-input{
+    display: flex;
+    align-items: center;
+ }
+ .ratio-text{
+    width: 100px;
+ }
+ /* .ClickableSVG circle {
      fill: red;
      stroke: black;
      stroke-width: 1;
  }
+ .ClickableSVG circle {
+     fill: green;
+     stroke: black;
+     stroke-width: 1;
+ } */
  .buttons{
     margin: 2px;
     background-color: red;
@@ -85,4 +109,11 @@
 .page-content{
     flex-grow: 2;
     padding: 20px;
+}
+.display-cams{
+    list-style-type:none
+}
+.loader{
+    margin-top: -85px;
+    width: 30px;
 }

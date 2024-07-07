@@ -6,13 +6,18 @@ import UploadImage from "./UploadImage";
 import { Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { FaRegTrashAlt } from "react-icons/fa";
+import loader from '../pics/loader1.gif'
+
 import { json } from "react-router-dom";
 
 function Xy_click() {
   const [coordinates, setCoordinates] = useState([]);
+  const [viewCoordinates, setViewCoordinates] = useState([]);
   const [rooms, setRooms] = useState([]);
   const [uploadImage, setUploadImage] = useState(false);
   const [imageURL, setImageURL] = useState(null);
+  const [isLoader, setIsLoader] = useState(false);
+  const [ratio, setRatio] = useState(100);
 
   const handleImageClick = (x, y) => {
     setCoordinates([...coordinates, { x, y }]);
@@ -27,7 +32,9 @@ function Xy_click() {
 // בסיום-לחץ על הכפתור "שלח"`);
 },[])
   const sendList = () => {
+    setViewCoordinates([])
     setUploadImage(true);
+
     // Calculate the ratio
     const x1 = 658;
     const x2 = 369;
@@ -41,21 +48,36 @@ function Xy_click() {
         y: point.y * ratio
       }));
     };
+    // Convert coordinates back to pixels
+    const convertToPixels = (points, inverseRatio) => {
+      return points.map(point => ({
+        x: point.x / inverseRatio,
+        y: point.y / inverseRatio
+      }));
+    };
 
     const roomsInMeters = rooms.map(room => convertToMeters(room, ratio));
-
+    setIsLoader(true)
     axios
       .post("http://127.0.0.1:5000/cover_apartment_by_cameras", {
         userId: sessionStorage.getItem("userId") || 1,
-        rooms: rooms,
+        rooms: roomsInMeters,
         imageURL: imageURL,
       })
       .then((res) => {
         console.log(res.data);
-        setCoordinates(res.data.optimalCoordinates);
+        setIsLoader(false)
+        const coordinatesInPixels = []
+        res.data.forEach(element => {
+            // Convert the coordinates from meters back to pixels
+          coordinatesInPixels.push(convertToPixels(element, ratio));
+          console.log(coordinatesInPixels)
+        });
+        setViewCoordinates(coordinatesInPixels);
 
       })
       .catch((err) => {
+        setIsLoader(false)
         console.log(err);
       });
   };
@@ -74,9 +96,17 @@ function Xy_click() {
     setRooms(newRooms);
   };
 
+  const handleChange = (event) => {
+    setRatio(event.target.value);
+  };
+
   return (
     <div className="page-wrapper">
-      <div className="sidebar">      
+      <div className="sidebar">   
+      <div className="ratio-input">
+        <div className="ratio-text">Pixels per meter:</div>
+        <input type="number" name="name" value={ratio} onChange={handleChange} /> 
+      </div>
         <Button as="a" variant="primary" onClick={addRoom}>
           הוסף חדר
         </Button>
@@ -85,6 +115,7 @@ function Xy_click() {
             שלח
           </Button>
         )}
+        {isLoader && <img src={loader} className="loader" alt="loader" />}
         <div className="cordinates-wrapper">
           <h4>Coordinates:</h4>
           {coordinates.length > 0 && (
@@ -116,10 +147,28 @@ function Xy_click() {
       </div>
       <div className="page-content">
       <h3>Upload a sketch and select the vertices of the rooms</h3>
+      {viewCoordinates.length > 0 && (
+            <div className="final-coordinates">
+              <div className="title">Results</div>
+              <ul className="display-cams">
+              {viewCoordinates.map((room, roomIndex) => (
+                <React.Fragment key={roomIndex}>
+                  <li className="room-index">Room {roomIndex + 1}</li>
+                  {room.map((coord, index) => (
+                    <li key={`${roomIndex}-${index}`} className="display-room">
+                      X: {coord.x}, Y: {coord.y}
+                    </li>
+                  ))}
+                </React.Fragment>
+              ))}
+              </ul>
+            </div>
+          )}
       <div>
         <UploadImage
           saveClick={handleImageClick}
           coordinates={coordinates}
+          viewCoordinates={viewCoordinates}
           uploadImage={uploadImage}
           setImageURL={setImageURL}
         />
