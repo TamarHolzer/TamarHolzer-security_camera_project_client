@@ -44,15 +44,15 @@ function Xy_click() {
     // Convert coordinates to meters
     const convertToMeters = (points, ratio) => {
       return points.map(point => ({
-        x: point.x / ratio,
-        y: point.y / ratio
+        x: point.x * ratio,
+        y: point.y * ratio
       }));
     };
     // Convert coordinates back to pixels
     const convertToPixels = (points, inverseRatio) => {
       return points.map(point => ({
-        x: point.x * inverseRatio,
-        y: point.y * inverseRatio
+        x: point.x / inverseRatio,
+        y: point.y / inverseRatio
       }));
     };
 
@@ -156,7 +156,7 @@ function Xy_click() {
                   <li className="room-index">Room {roomIndex + 1}</li>
                   {room.map((coord, index) => (
                     <li key={`${roomIndex}-${index}`} className="display-room">
-                      X: {coord.x}, Y: {coord.y}
+                      X: {coord.x}, Y: {coord.y}, Horizontal angale:{coord.horizontalAngale}, Vertical angale: {coord.verticalAngale}
                     </li>
                   ))}
                 </React.Fragment>
