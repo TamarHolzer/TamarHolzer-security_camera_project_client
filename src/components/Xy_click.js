@@ -44,15 +44,15 @@ function Xy_click() {
     // Convert coordinates to meters
     const convertToMeters = (points, ratio) => {
       return points.map(point => ({
-        x: point.x * ratio,
-        y: point.y * ratio
+        x: point.x / ratio,
+        y: point.y / ratio
       }));
     };
     // Convert coordinates back to pixels
     const convertToPixels = (points, inverseRatio) => {
       return points.map(point => ({
-        x: point.x / inverseRatio,
-        y: point.y / inverseRatio
+        x: point.x * inverseRatio,
+        y: point.y * inverseRatio
       }));
     };
 
@@ -110,7 +110,7 @@ function Xy_click() {
         <Button as="a" variant="primary" onClick={addRoom}>
           הוסף חדר
         </Button>
-        {rooms.length && (
+        {rooms.length > 0 && (
           <Button className="buttons" as="a" variant="primary" onClick={sendList}>
             שלח
           </Button>

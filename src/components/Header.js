@@ -2,18 +2,17 @@
 import React, { useState, useEffect } from 'react';
 import '../css/Header.css';
 import logo from '../pics/logo2.png'
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 const Header = () => {
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    if (loading) {
-      window.location.reload();
-    } else {
-      console.log('page already loaded');
-    }
-  }, [loading]);
+    const location = useLocation();
+  
+    useEffect(() => {
+      console.log('Location changed, header should refresh');
+    }, [location]);
+  
 
   return (
 
